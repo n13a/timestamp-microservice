@@ -18,7 +18,7 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
+// when the date parameter is empty, returns current time in unix and utc 
 app.get("/api/", (req, res) => {
   res.json({
     unix: Date.now(),
@@ -26,6 +26,7 @@ app.get("/api/", (req, res) => {
   })
 })
 
+// sends a JSON object with two keys, unix and utc, based on a valid date that user requests  
 app.get("/api/:date", (req, res) => {
   const d = req.params.date
   if (/^\d+$/.test(d)) {
