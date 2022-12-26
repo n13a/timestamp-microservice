@@ -26,6 +26,20 @@ app.get("/api/", (req, res) => {
   })
 })
 
+app.get("/api/:date", (req, res) => {
+  const d = req.params.date
+  if (/^\d+$/.test(d)) {
+    res.json({ unix: +d, utc: new Date(+d).toUTCString() })
+  } else if (new Date(d) == 'Invalid Date') {
+    res.json({ error: "Invalid Date" })
+  } else {
+    res.json({
+      unix: new Date(d).getTime(),
+      utc: new Date(d).toUTCString()
+    })
+  }
+});
+
 
 
 // listen for requests :)
